@@ -1,3 +1,21 @@
+set nocompatible " required file
+filetype off     " required
+
+" Set the runtime path to include Vundle and intialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" Let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+Plugin 'tmhedberg/SimplyFold'
+Plugin 'vim-scripts/indentpython.vim'
+Plugin 'Valloric/YouCompleteMe'
+
+" All of Plugins must be added before the following line
+call vundle#end()         " required
+filetype plugin indent on " required
+
+
 if v:progname =~? "evim"
   finish
 endif
@@ -14,19 +32,15 @@ if has("vms")
 else
   set backup            " keep a backup file
 endif
+
 set history=50          " keep 50 lines of command line history
 set ruler               " show the cursor position all the time
 set showcmd             " display incomplete commands
 set incsearch           " do incremental searching
 
-" For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
-" let &guioptions = substitute(&guioptions, "t", "", "g")
-" Don't use Ex mode, use Q for formatting
-map Q gq
- 
 " CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
 " so that you can undo CTRL-U after inserting a line break.
- inoremap <C-U> <C-G>u<C-U>
+inoremap <C-U> <C-G>u<C-U>
  
 " In many terminal emulators the mouse works just fine, thus enable it.
 if has('mouse')
@@ -40,38 +54,35 @@ if &t_Co > 2 || has("gui_running")
   set hlsearch
 endif
 
-if has("autocmd")
-
   " Enable file type detection.
   " Use the default filetype settings, so that mail gets 'tw' set to 72,
   " 'cindent' is on in C files, etc.
   " Also load indent files, to automatically do language-dependent indenting.
-  filetype plugin indent on
+filetype on
+filetype plugin on
+filetype indent on
  
   " Put these in an autocmd group, so that we can delete them easily.
   augroup vimrcEx
   au!
 
   " For all text files set 'textwidth' to 78 characters.
-  autocmd FileType text setlocal textwidth=78
+autocmd FileType text setlocal textwidth=78
 
   " When editing a file, always jump to the last known cursor position.
   " Don't do it when the position is invalid or when inside an event handler
   " (happens when dropping a file on gvim).
   " Also don't do it when the mark is in the first line, that is the default
   " position when opening a file.
-  autocmd BufReadPost *
-    \ if line("'\"") > 1 && line("'\"") <= line("$") |
-    \   exe "normal! g`\"" |
-    \ endif
+autocmd BufReadPost *
+  \ if line("'\"") > 1 && line("'\"") <= line("$") |
+  \   exe "normal! g`\"" |
+  \ endif
 
-  augroup END
+augroup END
 
-else
 
-  set autoindent                " always set autoindenting on
-     
-endif " has("autocmd")
+set autoindent                " always set autoindenting on
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
@@ -90,27 +101,16 @@ set number
 :nnoremap <D-Left> :bprevious<CR>
 :nnoremap <M-Left> :bprevious<CR>
 "" and don't let MacVim remap them
-if has("gui_macvim")
-        let macvim_skip_cmd_opt_movement = 1
-endif
  
-" When coding, auto-ident by 4 spaces, just like in K & R
+" When coding, auto-indent by 4 spaces, just like in K & R
 " Note that this does NOT change tab into 4 spaces
 " You can do that with "set tabstop=4", which is a BAD idea
 set shiftwidth=4
 
-"Always replace tab with 8 spaces, except for makefiles
 set expandtab
+"Always replace tab with 8 spaces, except for makefiles
 autocmd FileType make setlocal noexpandtab
-autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4
-
-" My settings when editing *.txt files
-" - automatically indent lines according to previous lines
-" - replace tab with 8 spaces
-" - when I hit tab key, move 2 spaces instead of 8
-" - wrap text if I go longer than 76 columns
-" - check spelling
-autocmd FileType text setlocal autoindent expandtab softabstop=2 textwidth=76 spell spelllang=en_us
+autocmd FileType html* setlocal ts=2 sw=2 expandtab
  
 " Don't do spell-checking on Vim help files.
 autocmd FileType help setlocal nospell
@@ -139,8 +139,30 @@ set cursorline
 colorscheme molokai
 set scrolloff=5
 
-"" Map to visual lines instead of actual lines.
+" Map to visual lines instead of actual lines.
 :nnoremap <buffer> <silent> k gk
 :nnoremap <buffer> <silent> j gj
 :nnoremap <buffer> <silent> 0 g0
 :nnoremap <buffer> <silent> $ g$
+
+" Map to switch windows
+:nnoremap <C-J> <C-W><C-J>
+:nnoremap <C-K> <C-W><C-K>
+:nnoremap <C-L> <C-W><C-L>
+:nnoremap <C-H> <C-W><C-H>
+
+" Enable folding
+set foldmethod=indent
+set foldlevel=99
+
+" Enable folding with the spacebar
+:nnoremap <space> za
+
+" See docstrings for folded code
+let g:SimplyFold_docstring_preview=1
+
+" Set UTF8 Support
+set encoding=utf-8
+
+let g:ycm_autoclose_preview_window_after_completion=1
+map <space>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
