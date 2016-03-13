@@ -1,0 +1,16 @@
+Xcode
+Atom
+Git
+Homebrew
+Python3
+Go 1.8
+Java 8
+Chrome
+Spotify
+Flux
+Vim
+Latex
+Latexian
+Sunrise
+Mjolnir
+Dropbox
