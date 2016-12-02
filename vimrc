@@ -7,9 +7,10 @@ call vundle#begin()
 
 " Let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
-Plugin 'tmhedberg/SimplyFold'
 Plugin 'vim-scripts/indentpython.vim'
-Plugin 'Valloric/YouCompleteMe'
+Plugin 'fatih/vim-go'
+Plugin 'rust-lang/rust.vim'
+Plugin 'nvie/vim-flake8'
 
 " All of Plugins must be added before the following line
 call vundle#end()         " required
@@ -132,9 +133,14 @@ set ignorecase
 " Markdown
 au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.md setf markdown
 
-execute pathogen#infect()
- 
-match Error /\%81v.\+/
+" YAML
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
+" Highlight anything over 80 characters long
+" match Error /\%81v.\+/
+
+" Set a line at 80 characters
+set colorcolumn=80
 set cursorline
 colorscheme molokai
 set scrolloff=5
@@ -164,5 +170,52 @@ let g:SimplyFold_docstring_preview=1
 " Set UTF8 Support
 set encoding=utf-8
 
-let g:ycm_autoclose_preview_window_after_completion=1
-map <space>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" Run Flake8 on write
+autocmd BufWritePost *.py call Flake8()
+
+" Show errors in file line
+let g:flake8_show_in_file=1
+
+" Show errors in gutter
+let g:flake8_show_in_gutter=1
+
+" Set mapleader
+let mapleader = "-"
+
+" Set maplocalleader
+let maplocalleader = "_"
+
+" Convert current word to uppercase in insert mode
+inoremap <leader><c-u> <esc>veU<esc>i
+
+" Convert current word to uppercase in normal mode
+nnoremap <leader><c-u> veU
+
+" Edit ~/.vimrc on the fly
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+
+" Source ~/.vimrc on the fly
+nnoremap <leader>sv :source $MYVIMRC<cr>
+
+" Abbreviation for my work email
+iabbrev @@ alex.roth@enigma.io
+
+" Wrap word in double quotation marks
+nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
+
+" Wrap word in single quotation marks
+nnoremap <leader>' viw<esc>a'<esc>hbi'<esc>lel
+
+" Jump to beginning of current line
+nnoremap H 0
+
+" Jump to the end of the current line
+nnoremap L $
+
+" Remap esc to jk
+inoremap jk <esc>
+
+" Wrap word in parentheses
+nnoremap <leader>p viw<esc>a)<esc>hbi(<esc>lel
+
+" Disable the escape key
