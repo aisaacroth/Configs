@@ -10,7 +10,10 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'vim-scripts/indentpython.vim'
 Plugin 'fatih/vim-go'
 Plugin 'rust-lang/rust.vim'
-Plugin 'nvie/vim-flake8'
+Plugin 'scrooloose/syntastic'
+Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim'}
+
+set laststatus=2
 
 " All of Plugins must be added before the following line
 call vundle#end()         " required
@@ -170,14 +173,18 @@ let g:SimplyFold_docstring_preview=1
 " Set UTF8 Support
 set encoding=utf-8
 
-" Run Flake8 on write
-autocmd BufWritePost *.py call Flake8()
+" Show errors in list
+let g:syntastic_always_populate_loc_list = 1
 
-" Show errors in file line
-let g:flake8_show_in_file=1
+" Run syntastic on opening file
+let g:syntastic_check_on_open = 0
 
-" Show errors in gutter
-let g:flake8_show_in_gutter=1
+" Run syntastic on write to file
+let g:syntastic_check_on_wq = 1
+
+" Python syntax highlighting
+let python_highlight_a1 = 1
+syntax on
 
 " Set mapleader
 let mapleader = "-"
@@ -218,4 +225,3 @@ inoremap jk <esc>
 " Wrap word in parentheses
 nnoremap <leader>p viw<esc>a)<esc>hbi(<esc>lel
 
-" Disable the escape key
