@@ -7,11 +7,11 @@ call vundle#begin()
 
 " Let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
-Plugin 'vim-scripts/indentpython.vim'
 Plugin 'fatih/vim-go'
 Plugin 'rust-lang/rust.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim'}
+Plugin 'elmcast/elm-vim'
 
 set laststatus=2
 
@@ -176,14 +176,20 @@ set encoding=utf-8
 " Show errors in list
 let g:syntastic_always_populate_loc_list = 1
 
+" Autofill the location list
+let g:syntastic_auto_loc_list = 1
+
 " Run syntastic on opening file
 let g:syntastic_check_on_open = 0
 
 " Run syntastic on write to file
 let g:syntastic_check_on_wq = 1
 
+" Turn on elm errors
+let g:elm_syntastic_show_warnings = 1
+
 " Python syntax highlighting
-let python_highlight_a1 = 1
+let python_highlight_all = 1
 syntax on
 
 " Set mapleader
@@ -205,7 +211,7 @@ nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " Abbreviation for my work email
-iabbrev @@ alex.roth@enigma.io
+iabbrev @@ aroth@dia.co
 
 " Wrap word in double quotation marks
 nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
