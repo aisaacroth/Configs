@@ -11,7 +11,7 @@ Plugin 'fatih/vim-go'
 Plugin 'rust-lang/rust.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim'}
-Plugin 'elmcast/elm-vim'
+Plugin 'ambv/black'
 
 set laststatus=2
 
@@ -185,12 +185,12 @@ let g:syntastic_check_on_open = 0
 " Run syntastic on write to file
 let g:syntastic_check_on_wq = 1
 
-" Turn on elm errors
-let g:elm_syntastic_show_warnings = 1
-
 " Python syntax highlighting
 let python_highlight_all = 1
 syntax on
+
+" Run Black on save
+autocmd BufWritePre *.py execute ':Black'
 
 " Set mapleader
 let mapleader = "-"
