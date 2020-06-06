@@ -52,9 +52,7 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 export GOPATH=$HOME/Programming/Projects/Go
 export GOBIN=$GOPATH/bin
-export TEXBIN=/usr/local/texlive/2015/bin/x86_64-darwin
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:${GOPATH}/bin:${TEXBIN}"
-export PKG_CONFIG_PATH=/Users/aisaacroth/anaconda/lib/pkgconfig/
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:${GOPATH}/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
