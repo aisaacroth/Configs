@@ -51,7 +51,10 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 export GOPATH=$HOME/Programming/Projects/Go
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:${GOPATH}/bin"
+export GOBIN=$GOPATH/bin
+export TEXBIN=/usr/local/texlive/2015/bin/x86_64-darwin
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:${GOPATH}/bin:${TEXBIN}"
+export PKG_CONFIG_PATH=/Users/aisaacroth/anaconda/lib/pkgconfig/
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -78,7 +81,12 @@ export LANG=en_US.UTF-8
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias clean="~/Programming/Projects/Workflow-Tools/clean-wrap.sh"
+alias check-email="python3 ~/Programming/Projects/Workflow-Tools/check_email.py"
+
 export WORKON_HOME="~/Programming/.virtualenvs"
-export VIRTUALENVWRAPPER_SCRIPT="/usr/local/bin/virtualenvwrapper.sh"
-export VIRTUALENV_PYTHON="/usr/local/bin/python3"
-source /usr/local/bin/virtualenvwrapper_lazy.sh
+export VIRTUALENVWRAPPER_PYTHON="/usr/local/bin/python3"
+export VIRTUALENVWRAPPER_VIRTUALENV="/usr/local/bin/virtualenv"
+source /usr/local/bin/virtualenvwrapper.sh
+
+alias vim='nvim'

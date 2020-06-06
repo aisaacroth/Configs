@@ -1,24 +1,29 @@
 set nocompatible " required file
 filetype off     " required
 
-" Set the runtime path to include Vundle and intialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
 
-" Let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-Plugin 'fatih/vim-go'
-Plugin 'rust-lang/rust.vim'
-Plugin 'scrooloose/syntastic'
-Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim'}
-Plugin 'ambv/black'
+" Using vim-plug
+Plug 'fatih/vim-go'
+" linter
+Plug 'neomake/neomake'
+" Powerline
+Plug 'vim-airline/vim-airline'
+" Powerline themes
+Plug 'vim-airline/vim-airline-themes'
+" Python formatter
+Plug 'ambv/black'
+" git integration
+Plug 'tpope/vim-fugitive'
 
 set laststatus=2
 
-" All of Plugins must be added before the following line
-call vundle#end()         " required
+" All of Plugs must be added before the following line
+call plug#end()         " required
 filetype plugin indent on " required
 
+" Set airline theme
+let g:airline_theme='dark'
 
 if v:progname =~? "evim"
   finish
@@ -71,7 +76,7 @@ filetype indent on
   au!
 
   " For all text files set 'textwidth' to 78 characters.
-autocmd FileType text setlocal textwidth=78
+" autocmd FileType text setlocal textwidth=78
 
   " When editing a file, always jump to the last known cursor position.
   " Don't do it when the position is invalid or when inside an event handler
@@ -173,17 +178,15 @@ let g:SimplyFold_docstring_preview=1
 " Set UTF8 Support
 set encoding=utf-8
 
-" Show errors in list
-let g:syntastic_always_populate_loc_list = 1
+" Run neomake when writing or reading a buffer, and no changes in insert and
+" normal mode (after 500s; no delay when writing).
+call neomake#configure#automake('nrwi', 500)
 
-" Autofill the location list
-let g:syntastic_auto_loc_list = 1
+" Open location list
+let g:neomake_open_list = 2
 
-" Run syntastic on opening file
-let g:syntastic_check_on_open = 0
-
-" Run syntastic on write to file
-let g:syntastic_check_on_wq = 1
+" Python checker (pylint)
+let g:neomake_python_enabled_makers = ['pylint']
 
 " Python syntax highlighting
 let python_highlight_all = 1
