@@ -13,8 +13,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " Python formatter
 Plug 'ambv/black'
-" git integration
-Plug 'tpope/vim-fugitive'
 
 set laststatus=2
 
@@ -214,7 +212,7 @@ nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " Abbreviation for my work email
-iabbrev @@ aroth@dia.co
+iabbrev @@ aroth@reonomy.com
 
 " Wrap word in double quotation marks
 nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
